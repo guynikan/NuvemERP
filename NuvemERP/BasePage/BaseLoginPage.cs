@@ -5,16 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NuvemERP.Page
+namespace NuvemERP.BasePage
 {
-    class LoginPage
+    public class BaseLoginPage:BasePage
     {
-        private Dsl dsl;
-
-        public LoginPage(IWebDriver driver)
-        {
-            dsl = new Dsl(driver);
-        }
 
         public void Autentica(string user, string pass)
         {

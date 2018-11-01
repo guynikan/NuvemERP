@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NuvemERP.BasePage;
 using NuvemERP.Page;
 using OpenQA.Selenium;
 using System;
@@ -14,13 +15,18 @@ namespace NuvemERP
     [TestFixture]
     class CamposObrigatoriosTest : AutomationCore
     {
+
+        BasePessoasPage basePessoasPage = new BasePessoasPage();
+        BaseProdutoPage baseProdutoPage = new BaseProdutoPage();
+        BasePedidoVendaPage basePedidoVendaPage = new BasePedidoVendaPage()
+;
         [TearDown]
         public new void RetornaParaOInicio()
         {
 
             Thread.Sleep(2000);
             dsl.ClicarBotao(".img-responsive");
-            IAlert alert = driver.SwitchTo().Alert();
+            IAlert alert = GetDriver().SwitchTo().Alert();
             alert.Accept();
         }
 
@@ -32,14 +38,14 @@ namespace NuvemERP
         [TestCase("", "DESCRICAO")]
         public void TestaCamposObrigatoriosNoCadastroDeItem(string codigo, string descricao)
         {
-            produtoPage.AcessarPagina();
-            produtoPage.Cadastrar();
-            produtoPage.SetCodigo(codigo);
-            produtoPage.SetDescricao(descricao);
-            produtoPage.Salvar();
+            baseProdutoPage.AcessarPagina();
+            baseProdutoPage.Cadastrar();
+            baseProdutoPage.SetCodigo(codigo);
+            baseProdutoPage.SetDescricao(descricao);
+            baseProdutoPage.Salvar();
 
             Thread.Sleep(2000);
-            Assert.IsTrue(driver.FindElement(By.CssSelector(".gritter-title")).Text.Contains("Campo Obrigatório"));
+            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains("Campo Obrigatório"));
         }
 
         [TestCase(".fa-info-circle", "", "", "")]
@@ -48,17 +54,17 @@ namespace NuvemERP
         // faltando testcase??
         public void TestaCamposObrigatoriosNoCadastroDePessoa(string tipo, string codigo, string nome, string cpf)
         {            
-            pessoasPage.AcessarPagina();
-            pessoasPage.Cadastrar();
-            pessoasPage.SetTipoCadastro(tipo);
-            pessoasPage.SetTipoPessoa("Pessoa Física");
-            pessoasPage.SetCodigo(codigo);
-            pessoasPage.SetNome(nome);
-            pessoasPage.SetCPF(cpf);
-            pessoasPage.Salvar();
+            basePessoasPage.AcessarPagina();
+            basePessoasPage.Cadastrar();
+            basePessoasPage.SetTipoCadastro(tipo);
+            basePessoasPage.SetTipoPessoa("Pessoa Física");
+            basePessoasPage.SetCodigo(codigo);
+            basePessoasPage.SetNome(nome);
+            basePessoasPage.SetCPF(cpf);
+            basePessoasPage.Salvar();
 
             Thread.Sleep(2000);
-            Assert.IsTrue(driver.FindElement(By.CssSelector(".gritter-title")).Text.Contains("Nome"));
+            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains("Nome"));
             
         }
 
@@ -66,21 +72,21 @@ namespace NuvemERP
         [TestCase("", "", "", "", "", "001", "10000")]
         public void TestaCamposObrigatoriosNoCadastroDePedido(string codigo, string condicao, string contabancaria, string pagamento, string categoria, string produto, string quantidade)
         {
-            pedidoVendaPage.AcessarPagina();
-            pedidoVendaPage.Cadastrar();
-            pedidoVendaPage.SetCodigoCliente(codigo);
-            pedidoVendaPage.SetCondicaoPagamento(condicao);
-            pedidoVendaPage.SetContaBancaria(contabancaria);
-            pedidoVendaPage.SetPagamento(pagamento);
-            pedidoVendaPage.SetCategoriaFinanceira(categoria);
-            pedidoVendaPage.SetProduto(produto, quantidade);
-            pedidoVendaPage.SetRecalcula();
-            pedidoVendaPage.Salvar();
+            basePedidoVendaPage.AcessarPagina();
+            basePedidoVendaPage.Cadastrar();
+            basePedidoVendaPage.SetCodigoCliente(codigo);
+            basePedidoVendaPage.SetCondicaoPagamento(condicao);
+            basePedidoVendaPage.SetContaBancaria(contabancaria);
+            basePedidoVendaPage.SetPagamento(pagamento);
+            basePedidoVendaPage.SetCategoriaFinanceira(categoria);
+            basePedidoVendaPage.SetProduto(produto, quantidade);
+            basePedidoVendaPage.SetRecalcula();
+            basePedidoVendaPage.Salvar();
 
-            // campos obrigatorios itens e condição de pagamento
+            // campos obrigatorios: itens e condição de pagamento
             Thread.Sleep(2000);
-            Assert.IsTrue(driver.FindElement(By.CssSelector(".gritter-title")).Text.Contains("Sem Itens"));
-            Assert.IsTrue(driver.FindElement(By.CssSelector(".gritter-title")).Text.Contains("Sem Condição de Pagamento"));
+            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains("Sem Itens"));
+            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains("Sem Condição de Pagamento"));
         }
     }
 }

@@ -1,24 +1,12 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
+using NuvemERP.BasePage;
 
-namespace NuvemERP.Page
+namespace NuvemERP.BasePage
 {
 
-    public class PessoasPage
+    public class BasePessoasPage: BasePage
     {
-        private Dsl dsl;
-        string tipoPessoa = "";
-
-        public PessoasPage(IWebDriver driver)
-        {
-            dsl = new Dsl(driver);
-        }
+        
 
         public void AcessarPagina()
         {
@@ -147,14 +135,21 @@ namespace NuvemERP.Page
             dsl.ClicarBotao("button.js_update:nth-child(2)");
         }
 
-        
-        public void Excluir(string codigo)
+
+        public void PesquisarCadastroPessoa(string codigo)
         {
             dsl.Escrever("input.form-control:nth-child(1)", codigo);
+        }
+
+        public void Excluir() { 
             dsl.ClicarBotao("tr.gradeA:nth-child(1) > td:nth-child(8) > div:nth-child(1) > button:nth-child(1)");
             dsl.ClicarBotao("div.open > ul:nth-child(2) > li:nth-child(1) > a:nth-child(3)");
             dsl.ClicarBotao("#Excluir");
-            
+            Thread.Sleep(2000);
+
+            // método de assert deve ficar nos testes, certo?
+            //Assert.IsTrue(getDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains("Exclusão foi Realizada"));
+
         }
 
 
