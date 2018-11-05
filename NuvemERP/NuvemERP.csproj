@@ -55,15 +55,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CamposObrigatoriosTest.cs" />
-    <Compile Include="Dsl.cs" />
-    <Compile Include="Page\PessoasPage.cs" />
-    <Compile Include="Page\ProdutoPage.cs" />
-    <Compile Include="Page\LoginPage.cs" />
+    <Compile Include="BasePage\BasePage.cs" />
+    <Compile Include="Testes\CadastroPessoaTest.cs" />
+    <Compile Include="Testes\CamposObrigatoriosTest.cs" />
+    <Compile Include="Core\Dsl.cs" />
+    <Compile Include="BasePage\BasePessoasPage.cs" />
+    <Compile Include="BasePage\BaseProdutoPage.cs" />
+    <Compile Include="BasePage\BaseLoginPage.cs" />
+    <Compile Include="BasePage\BasePedidoVendaPage.cs" />
+    <Compile Include="Core\AutomationCore.cs" />
     <Compile Include="Page\PedidoVendaPage.cs" />
-    <Compile Include="AutomationCore.cs" />
+    <Compile Include="Page\PessoaPage.cs" />
+    <Compile Include="Page\ProdutoPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Configuracao.cs" />
+    <Compile Include="Core\Configuracao.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

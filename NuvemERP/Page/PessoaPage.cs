@@ -9,14 +9,15 @@ namespace NuvemERP.Page
 {
    public class PessoaPage:BasePessoasPage
     {
-        //[TestCaseSource("DataPessoa")] possivelmente, vai ser necessário criar um schema, de forma que, no teste chame o método e através da chamada do teste seja passada a source
-        public void CadastraNovaPessoa(string tipo = ".fa - info - circle", string codigo = "", string nome = "", string cpf = "", string cep = "", string numero = "")
+       
+        public void CadastraNovaPessoa(string tipo = ".fa - info - circle", string nome = "", string cpf = "", string cep = "")
         {
+            
             AcessarPagina();
             Cadastrar();
             SetTipoCadastro(tipo);
             SetTipoPessoa("Pessoa Física");
-            SetCodigo(codigo);
+            SetCodigo();
             SetNome(nome);
             SetCPF(cpf);
             AcessarImpostoETributacao();
@@ -25,7 +26,7 @@ namespace NuvemERP.Page
             SetTipoIe();
             AcessarDadosDeEndereco();
             SetCep(cep);
-            SetNumero(numero);
+            SetNumero();
             Salvar();
 
         }

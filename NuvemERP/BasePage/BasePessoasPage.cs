@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using NuvemERP.BasePage;
 
 namespace NuvemERP.BasePage
@@ -6,7 +7,8 @@ namespace NuvemERP.BasePage
 
     public class BasePessoasPage: BasePage
     {
-        
+            Random rnd = new Random();
+            string valor;   
 
         public void AcessarPagina()
         {
@@ -30,19 +32,20 @@ namespace NuvemERP.BasePage
 
         public void SetTipoPessoa(string valor)
         {
-            tipoPessoa = valor;
-            dsl.SelecionarComboBox("#TIPOPESSOA", tipoPessoa);
+            this.valor = valor;
 
+            dsl.SelecionarComboBox("#TIPOPESSOA",this.valor);
         }
 
-        public void SetCodigo(string id)
+        public void SetCodigo()
         {
-            dsl.Escrever("#CODIGO", id);
+            int Numero = rnd.Next(1000, 10000);
+            dsl.Escrever("#CODIGO", Numero.ToString());
         }
 
         public void SetNome(string nome)
         {
-            if(tipoPessoa == "Pessoa Jurídica")
+            if( valor == "Pessoa Jurídica")
             {
                 dsl.Escrever("#RAZAOSOCIAL", nome);
             }
@@ -124,9 +127,11 @@ namespace NuvemERP.BasePage
             dsl.Escrever("#CEP", codigo);
         }
 
-        public void SetNumero(string codigo = "85")
+        public void SetNumero()
         {
-            dsl.Escrever("#NUMERO", codigo);
+
+            int Numero = rnd.Next(20, 2000);
+            dsl.Escrever("#NUMERO", Numero.ToString());
         }
         #endregion
 
