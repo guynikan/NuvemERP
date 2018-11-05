@@ -18,5 +18,13 @@ namespace NuvemERP
         {
             pessoaPage.CadastraNovaPessoa(tipo, nome, NewCpf(), cep);
         }
+
+        [TestCaseSource("DataPessoa")]
+        public void ExcluirPessoa(string tipo, string nome, string cep)
+        {
+            pessoaPage.ExcluiPessoa(nome);
+
+            
+        }
     }
 }

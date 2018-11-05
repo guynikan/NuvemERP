@@ -115,9 +115,10 @@ namespace NuvemERP
                             string[] split = line.Split(new char[] { ',' },
                                 StringSplitOptions.None);
 
-                            string tipo = split[0];
-                            string nome = split[1];
-                            string cep = split[2];
+                            string tipo = "#ECLIENTE";
+                            string nome = split[0];
+                            string cep = split[1];
+
 
 
                             var testCase = new TestCaseData(tipo, nome, cep);
