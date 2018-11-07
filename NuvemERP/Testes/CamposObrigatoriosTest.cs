@@ -89,9 +89,10 @@ namespace NuvemERP
         }
 
 
-        //[TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "")]
+
+        //[TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "")] por hora o primeiro testcase não é testado
         [TestCase("", "001 - 6 Parcelas - 1ª p/ 7 dias", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "")]
-        [TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "001", "10000")]
+        [TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "0001", "10000")]
         public void TestaCamposObrigatoriosNoCadastroDePedido(string codigo, string condicao, string contabancaria, string pagamento, string categoria, string produto, string quantidade)
         {
             //
@@ -107,26 +108,15 @@ namespace NuvemERP
             basePedidoVendaPage.SetProduto(produto, quantidade);
             basePedidoVendaPage.SetRecalcula();
             basePedidoVendaPage.Salvar();
-            
-            //string msg2 = GetDriver().FindElement(By.XPath("/html/body/div[4]/div[2]/div[2]/span")).Text;
 
+            string msg = dsl.GetTexto(".gritter-title");
+            Thread.Sleep(2000);
             //
             // assert
             //
             // as mensagens validadas são: "Sem Itens" e "Sem Condição de Pagamento"
-            //AssertCamposObrigatoriosNoCadastroDePedido(msg1, msg2); por hora o primeiro testcase não é testado
-            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(dsl.GetTexto("gritter-tile")));
+            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(msg));
             //Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(msg));
         }
-
-        //public void AssertCamposObrigatoriosNoCadastroDePedido(string msg1, string msg2)
-        //{
-
-        //    Assert.Multiple(() =>
-        //    {
-        //        Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(msg1.ToString()));
-        //        Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(msg2.ToString()));
-        //    });
-        //}
     }
 }

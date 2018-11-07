@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NuvemERP
 {
-    public class Dsl:AutomationCore
+    public class Dsl
     {
         
         WebDriverWait wait;
@@ -18,7 +18,7 @@ namespace NuvemERP
 
         public Dsl()
         {
-            wait = wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(20));
+            wait = wait = new WebDriverWait(AutomationCore.GetDriver(), TimeSpan.FromSeconds(20));
         }
 
         /********* Botao ************/
@@ -28,7 +28,7 @@ namespace NuvemERP
 
             //wait.Until<IWebElement>(d => d.FindElement(By.CssSelector(id)));
             wait.Until(ExpectedConditions.ElementToBeClickable((By.CssSelector(id))));
-            GetDriver().FindElement(By.CssSelector(id)).Click();
+            AutomationCore.GetDriver().FindElement(By.CssSelector(id)).Click();
 
         }
 
@@ -38,15 +38,16 @@ namespace NuvemERP
         {
             //wait.Until<IWebElement>(d => d.FindElement(By.CssSelector(id)));
             wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector(id))));
-            GetDriver().FindElement(By.CssSelector(id)).Clear();
-            GetDriver().FindElement(By.CssSelector(id)).SendKeys(texto);
+            AutomationCore.GetDriver().FindElement(By.CssSelector(id)).Clear();
+            AutomationCore.GetDriver().FindElement(By.CssSelector(id)).SendKeys(texto);
         }
 
         /************Pega Texto***************/
 
         public string GetTexto(string elemento)
         {
-            string texto = GetDriver().FindElement(By.CssSelector(elemento)).Text;
+            wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector(elemento))));
+            string texto = AutomationCore.GetDriver().FindElement(By.CssSelector(elemento)).Text;
 
             return texto;
         }
@@ -56,20 +57,20 @@ namespace NuvemERP
         public void SelecionarOpcao(string by)
         {
             Thread.Sleep(1000);
-            GetDriver().FindElement(By.CssSelector(by)).SendKeys(Keys.ArrowDown);
-            GetDriver().FindElement(By.CssSelector(by)).SendKeys(Keys.Enter);
+            AutomationCore.GetDriver().FindElement(By.CssSelector(by)).SendKeys(Keys.ArrowDown);
+            AutomationCore.GetDriver().FindElement(By.CssSelector(by)).SendKeys(Keys.Enter);
         }
 
         /********* Radio e Check ************/
 
         public void ClicarRadio(string by)
         {
-            GetDriver().FindElement(By.CssSelector(by)).Click();
+            AutomationCore.GetDriver().FindElement(By.CssSelector(by)).Click();
         }
 
         public void ClicarCheck(string by)
         {
-            GetDriver().FindElement(By.CssSelector(by)).Click();
+            AutomationCore.GetDriver().FindElement(By.CssSelector(by)).Click();
         }
 
         /********* Combo ************/
@@ -82,7 +83,7 @@ namespace NuvemERP
 
         public void SelecionarComboBox(string id, string valor)
         {
-            var element = GetDriver().FindElement(By.CssSelector(id));
+            var element = AutomationCore.GetDriver().FindElement(By.CssSelector(id));
             var selectElement = new SelectElement(element);
 
             wait.Until<IWebElement>(d => d.FindElement(By.CssSelector(id)));
