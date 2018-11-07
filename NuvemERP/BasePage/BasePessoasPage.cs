@@ -5,10 +5,11 @@ using NuvemERP.BasePage;
 namespace NuvemERP.BasePage
 {
 
-    public class BasePessoasPage: BasePage
+    public class BasePessoasPage : BasePage
     {
-            Random rnd = new Random();
-            string valor;   
+        Random rnd = new Random();
+        string valor;
+
 
         public void AcessarPagina()
         {
@@ -34,7 +35,7 @@ namespace NuvemERP.BasePage
         {
             this.valor = valor;
 
-            dsl.SelecionarComboBox("#TIPOPESSOA",this.valor);
+            dsl.SelecionarComboBox("#TIPOPESSOA", this.valor);
         }
 
         public void SetCodigo()
@@ -43,15 +44,20 @@ namespace NuvemERP.BasePage
             dsl.Escrever("#CODIGO", Numero.ToString());
         }
 
+        public void SetCodigo(string codigo)
+        {
+            dsl.Escrever("#CODIGO", codigo);
+        }
+
         public void SetNome(string nome)
         {
-            if( valor == "Pessoa Jurídica")
+            if (valor == "Pessoa Jurídica")
             {
                 dsl.Escrever("#RAZAOSOCIAL", nome);
             }
             else
             {
-            dsl.Escrever("#NOME", nome);
+                dsl.Escrever("#NOME", nome);
             }
         }
 
@@ -63,6 +69,11 @@ namespace NuvemERP.BasePage
         public void SetCPF(string codigo)
         {
             dsl.Escrever("#CPF", codigo);
+        }
+
+        public void SetCPF()
+        {
+            dsl.Escrever("#CPF", NewCpf());
         }
 
         public void SetRg(string codigo)
@@ -146,7 +157,8 @@ namespace NuvemERP.BasePage
             dsl.Escrever("input.form-control:nth-child(1)", codigo);
         }
 
-        public void Excluir() { 
+        public void Excluir()
+        {
             dsl.ClicarBotao("tr.gradeA:nth-child(1) > td:nth-child(8) > div:nth-child(1) > button:nth-child(1)");
             dsl.ClicarBotao("div.open > ul:nth-child(2) > li:nth-child(1) > a:nth-child(3)");
             dsl.ClicarBotao("#Excluir");

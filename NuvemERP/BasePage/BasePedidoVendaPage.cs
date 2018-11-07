@@ -56,11 +56,16 @@ namespace NuvemERP.BasePage
         public void SetProduto(string codigo, string quantidade)
         {
             dsl.Escrever("#BUSCA_ESTOQUE", codigo);
-            dsl.SelecionarOpcao("#BUSCA_ESTOQUE");
-            Thread.Sleep(2000);
-            dsl.Escrever("#ADDQUANTIDADE", quantidade);
-            dsl.ClicarBotao("#box-additem > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)");
-            Thread.Sleep(2000);
+
+            if (codigo != string.Empty)
+            {
+                dsl.SelecionarOpcao("#BUSCA_ESTOQUE");
+                Thread.Sleep(2000);
+                dsl.Escrever("#ADDQUANTIDADE", quantidade);
+                dsl.ClicarBotao("#box-additem > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)");
+                Thread.Sleep(2000);
+            }
+
         }
 
         public void SetRecalcula()

@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace NuvemERP.Page
 {
-   public class PessoaPage:BasePessoasPage
+    public class PessoaPage : BasePessoasPage
     {
-       
+
         public void CadastraNovaPessoa(string tipo = ".fa - info - circle", string nome = "", string cpf = "", string cep = "")
         {
-            
+
             AcessarPagina();
             Cadastrar();
             SetTipoCadastro(tipo);
             SetTipoPessoa("Pessoa Física");
             SetCodigo();
             SetNome(nome);
-            SetCPF(cpf);
+            SetCPF();
             AcessarImpostoETributacao();
             SetTipoAquisicao();
             SetTipoRegime();
@@ -30,12 +30,13 @@ namespace NuvemERP.Page
             Salvar();
 
         }
+
         public void ExcluiPessoa(string codigo)
         {
             AcessarPagina();
             PesquisarCadastroPessoa(codigo);
             Excluir();
-            
+
         }
     }
 }

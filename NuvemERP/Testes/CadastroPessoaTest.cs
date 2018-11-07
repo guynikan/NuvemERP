@@ -16,15 +16,13 @@ namespace NuvemERP
         [TestCaseSource("DataPessoa")] 
         public void CadastroPessoa(string tipo, string nome, string cep)
         {
-            pessoaPage.CadastraNovaPessoa(tipo, nome, NewCpf(), cep);
+            pessoaPage.CadastraNovaPessoa(tipo, nome, cep);
         }
 
         [TestCaseSource("DataPessoa")]
         public void ExcluirPessoa(string tipo, string nome, string cep)
         {
             pessoaPage.ExcluiPessoa(nome);
-
-            
         }
     }
 }
