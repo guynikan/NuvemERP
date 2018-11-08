@@ -90,10 +90,13 @@ namespace NuvemERP
 
 
 
-        //[TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "")] por hora o primeiro testcase não é testado
-        [TestCase("", "001 - 6 Parcelas - 1ª p/ 7 dias", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "")]
-        [TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "0001", "10000")]
-        public void TestaCamposObrigatoriosNoCadastroDePedido(string codigo, string condicao, string contabancaria, string pagamento, string categoria, string produto, string quantidade)
+        //[TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "", "Sem Condição de Pagamento")]
+        //[TestCase("", "001 - 6 Parcelas - 1ª p/ 7 dias", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "", "",
+        //".gritter-title", "Sem Itens")]
+        [TestCase("", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "00000 - NÃO INFORMADO", "0001", "10000",
+            "/html/body/div[4]/div[2]/div[2]/div[1]/span", "Sem Condição de Pagamento")]
+        public void TestaCamposObrigatoriosNoCadastroDePedido(string codigo, string condicao, string contabancaria, string pagamento, string categoria,
+            string produto, string quantidade,string expected, string actual)
         {
             //
             // act
@@ -109,13 +112,12 @@ namespace NuvemERP
             basePedidoVendaPage.SetRecalcula();
             basePedidoVendaPage.Salvar();
 
-            string msg = dsl.GetTexto(".gritter-title");
-            Thread.Sleep(2000);
+            
             //
             // assert
             //
             // as mensagens validadas são: "Sem Itens" e "Sem Condição de Pagamento"
-            Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(msg));
+            Assert.AreEqual(dsl.GetTexto(expected), actual);
             //Assert.IsTrue(GetDriver().FindElement(By.CssSelector(".gritter-title")).Text.Contains(msg));
         }
     }

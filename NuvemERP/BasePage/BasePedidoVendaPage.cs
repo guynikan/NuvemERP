@@ -27,7 +27,7 @@ namespace NuvemERP.BasePage
         public void SetCodigoCliente(string codigo)
         {
             dsl.Escrever("#BUSCA_PESSOAS", codigo);
-            dsl.SelecionarOpcao("#BUSCA_PESSOAS");
+            dsl.SelecionarOpcaoTeclado("#BUSCA_PESSOAS");
 
         }
 
@@ -59,8 +59,7 @@ namespace NuvemERP.BasePage
 
             if (codigo != string.Empty)
             {
-                dsl.SelecionarOpcao("#BUSCA_ESTOQUE");
-                Thread.Sleep(2000);
+                dsl.SelecionarOpcao();
                 dsl.Escrever("#ADDQUANTIDADE", quantidade);
                 dsl.ClicarBotao("#box-additem > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)");
                 Thread.Sleep(2000);

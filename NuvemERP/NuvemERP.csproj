@@ -69,6 +69,7 @@
     <Compile Include="Page\ProdutoPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Configuracao.cs" />
+    <Compile Include="Testes\PoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

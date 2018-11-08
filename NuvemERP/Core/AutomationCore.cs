@@ -56,7 +56,7 @@ namespace NuvemERP
         [OneTimeTearDown]
         public void RunAfterAnyTests()
         {
-            driver.Quit();
+         //   driver.Quit();
         }
 
         // Source Itens

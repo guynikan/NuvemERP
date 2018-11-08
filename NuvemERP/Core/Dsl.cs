@@ -18,7 +18,7 @@ namespace NuvemERP
 
         public Dsl()
         {
-            wait = wait = new WebDriverWait(AutomationCore.GetDriver(), TimeSpan.FromSeconds(20));
+            wait = new WebDriverWait(AutomationCore.GetDriver(), TimeSpan.FromSeconds(20));
         }
 
         /********* Botao ************/
@@ -46,19 +46,26 @@ namespace NuvemERP
 
         public string GetTexto(string elemento)
         {
-            wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector(elemento))));
-            string texto = AutomationCore.GetDriver().FindElement(By.CssSelector(elemento)).Text;
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(elemento)));
+            string texto = AutomationCore.GetDriver().FindElement(By.XPath(elemento)).Text;
 
             return texto;
         }
 
-        /*********Selecionar numa lista*******/
+        /*********Selecionar item numa lista utilizando teclas*******/
 
-        public void SelecionarOpcao(string by)
+        public void SelecionarOpcaoTeclado(string by)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             AutomationCore.GetDriver().FindElement(By.CssSelector(by)).SendKeys(Keys.ArrowDown);
+            Thread.Sleep(1000);
             AutomationCore.GetDriver().FindElement(By.CssSelector(by)).SendKeys(Keys.Enter);
+        }
+
+        public void SelecionarOpcao()
+        {
+            wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector("li.ui-menu-item:nth-child(1)"))));
+            AutomationCore.GetDriver().FindElement(By.CssSelector("li.ui-menu-item:nth-child(1)")).Click();
         }
 
         /********* Radio e Check ************/
